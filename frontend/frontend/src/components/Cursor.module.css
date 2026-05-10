@@ -1,0 +1,59 @@
+/* ── hide native cursor everywhere ── */
+*, *::before, *::after { cursor: none !important; }
+
+/* ── lagging ring ── */
+.ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 107, 43, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  will-change: left, top;
+  transition:
+    width  .22s cubic-bezier(.22,1,.36,1),
+    height .22s cubic-bezier(.22,1,.36,1),
+    border-color .22s ease,
+    background   .22s ease,
+    opacity .3s ease;
+}
+
+/* ── sharp dot ── */
+.dot {
+  position: fixed;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  will-change: left, top;
+  box-shadow: 0 0 8px rgba(255,107,43,.9), 0 0 20px rgba(255,107,43,.3);
+  transition: width .15s, height .15s, background .15s, box-shadow .15s;
+}
+
+/* ── hover over interactive element ── */
+.ring.big {
+  width: 54px; height: 54px;
+  border-color: rgba(139, 92, 246, 0.65);
+  background: rgba(139, 92, 246, 0.07);
+}
+.dot.dotBig {
+  width: 4px; height: 4px;
+  background: var(--violet);
+  box-shadow: 0 0 8px rgba(139,92,246,.9);
+}
+
+/* ── click / press ── */
+.ring.pressed {
+  width: 26px; height: 26px;
+  border-color: rgba(255,107,43,.9);
+  background: rgba(255,107,43,.12);
+}
+
+/* ── hide on touch devices ── */
+@media (hover: none) {
+  .ring, .dot { display: none; }
+  *, *::before, *::after { cursor: auto !important; }
+}
